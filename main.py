@@ -57,16 +57,31 @@ print (subject_1.x_mean())
 
 #----------------------------------
 
-import requests as req
-import json
-
-#Extrayendo json
-
-
-
-
-
+import funcs
+import time
 
 # 1.Cantidad total de municipios
 
+print("Cantidad total de municipios es "+ str(funcs.get_muni(funcs.data)))
 
+# 2.confirmados totales a 26-FEB-2020
+
+date = "2020/02/26"
+print("Confirmados totales a 26-FEB-2020 es " + str(funcs.get_ccdate(funcs.data, date)))
+
+# 3.confirmados totales a 1-JUL-2020
+
+date = "2020/07/01"
+print("Confirmados totales a 1-JUL-2020 es " + str(funcs.get_ccdate(funcs.data, date)))
+
+# 4.Obtener los 10 municipios con mayor cantidad de confirmados totales
+
+print("10 municipios con mayor cantidad de confirmados totales:")
+print(funcs.top_ten(funcs.data))
+
+# 5.Crear una lista con la sumatoria de los casos confirmados totales por día
+
+start = time.perf_counter()
+print(funcs.sum_tot_dia(funcs.data))
+finish = time.perf_counter()
+print(finish - start)
