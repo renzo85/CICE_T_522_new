@@ -64,33 +64,21 @@ class Statistics:
     def cor(self):
         return self.cov / ((self.x_var ** 0.5) * (self.y_var ** 0.5))
 
-#14. Pendiente de la recta
+#14. Pendiente de la recta B
 
     @property
-    def pend(self):
-        return self.cor / ((self.y_var ** 0.5) / (self.x_var ** 0.5))
+    def Bpend(self):
+        return self.cor * ((self.y_var ** 0.5) / (self.x_var ** 0.5))
 
 # 15.B0
 
     @property
     def B0(self):
-        return self.y_mean - (self.pend * self.x_mean)
+        return self.y_mean - (self.Bpend * self.x_mean)
 
 # 16.Puntuación directa: Y' = BXⁱ + B0
 
     def prediction(self, value):
-        return (self.pend * value) + self.B0
+        return (self.Bpend * value) + self.B0
 
 
-
-subject_1 = Statistics([1,2,3], [4,5,6])
-print (subject_1.x_mean)
-
-print (subject_1.x_mean)
-print (subject_1.x_var)
-print (subject_1.y_var)
-print(subject_1.cov)
-print(subject_1.cor)
-print(subject_1.pend)
-print(subject_1.B0)
-print(subject_1.prediction(4))
