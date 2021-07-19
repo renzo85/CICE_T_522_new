@@ -37,28 +37,11 @@
 
 # 17.Cuántos confirmados tendremos el 1 de agosto del año 2020?
 
-class Statistics:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        #el self n no lo pongo aquí porque se ejecutaría de forma estática y no se actualizaría conforme los valores de x que yo añada. Por eso lo uso como decorador de propiedad
-
-    @property #uso de decorador
-    def n(self): #solo cuando sea él mismo, no le puedo añadir otro valor
-        return len(self.x)
-
-    def x_mean(self):
-        return sum(self.x)/self.n
-
-subject_1 = Statistics([20,18,18,16], [1,2,3,4] )
-print (subject_1.x_mean())
-subject_1.x.append(19)
-print (subject_1.x_mean())
-
 #----------------------------------
 
 import funcs
 import time
+from std import Statistics
 
 # 1.Cantidad total de municipios
 
@@ -82,6 +65,47 @@ print(funcs.top_ten(funcs.data))
 # 5.Crear una lista con la sumatoria de los casos confirmados totales por día
 
 start = time.perf_counter()
-print(funcs.sum_tot_dia(funcs.data))
+Y = funcs.sum_tot_dia(funcs.data)
+print (Y)
 finish = time.perf_counter()
 print(finish - start)
+
+Y = dict(sorted(Y.items(), key= lambda tupla: tupla[0]))
+#X = list(Y.keys())
+Y = list(Y.values())
+X = []
+for num in range(1, len(Y) + 1): #se le aumenta 1 porque no incluía el último número
+    X.append(num)
+print(Y, X)
+
+# 6.Crear un objeto estadística que reciba un valor X y otro valor Y, deben ser listas
+
+covid_data = Statistics(X, Y)
+
+# 7.Agregar las siguientes propiedades:
+
+# 8.Obtener n
+print (covid_data.n)
+
+# 9.Media X e Y
+print (covid_data.x_mean)
+print (covid_data.y_mean)
+
+# 10.Varianza_x
+print(covid_data.x_var)
+
+# 11.Varianza_y
+print(covid_data.y_var)
+
+# 12.Covarianza
+print(covid_data.cov)
+
+# 13.Coeficiente de correlación entre x e y
+print (covid_data.cor)
+
+#14. Pendiente de la recta
+print (covid_data.pend)
+
+# 15.B0
+print (covid_data.B0)
+
